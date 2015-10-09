@@ -1,0 +1,3 @@
+[console_scripts]
+jws = acme.jose.jws:CLI.run
+
