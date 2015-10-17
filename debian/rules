@@ -1,0 +1,12 @@
+#!/usr/bin/make -f
+
+export PYBUILD_NAME = acme
+
+%:
+	dh $@ --with python2 --buildsystem=pybuild
+
+override_dh_auto_install:
+	dh_auto_install
+	rm -rf $(CURDIR)/debian/python-acme/usr/lib/python2.7/dist-packages/acme/testdata
+	rm -f $(CURDIR)/debian/python-acme/usr/bin/jws
+	rm -f $(CURDIR)/debian/python-acme/usr/share/man/man1/jws.1
