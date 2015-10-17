@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: acme
-Version: 0.0.0.dev20151008
+Version: 0.0.0.dev20151017
 Summary: ACME protocol implementation
 Home-page: https://github.com/letsencrypt/letsencrypt
 Author: Let's Encrypt Project
