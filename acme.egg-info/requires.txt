@@ -10,6 +10,11 @@ six
 werkzeug
 mock
 
+[docs]
+Sphinx>=1.0
+sphinx_rtd_theme
+sphinxcontrib-programoutput
+
 [testing]
 nose
 tox

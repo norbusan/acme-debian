@@ -1,7 +1,7 @@
 Metadata-Version: 1.1
 Name: acme
-Version: 0.0.0.dev20151021
-Summary: ACME protocol implementation
+Version: 0.0.0.dev20151024
+Summary: ACME protocol implementation in Python
 Home-page: https://github.com/letsencrypt/letsencrypt
 Author: Let's Encrypt Project
 Author-email: client-dev@letsencrypt.org
@@ -14,5 +14,8 @@ Classifier: License :: OSI Approved :: Apache Software License
 Classifier: Programming Language :: Python
 Classifier: Programming Language :: Python :: 2
 Classifier: Programming Language :: Python :: 2.7
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.3
+Classifier: Programming Language :: Python :: 3.4
 Classifier: Topic :: Internet :: WWW/HTTP
 Classifier: Topic :: Security
