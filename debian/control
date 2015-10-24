@@ -9,6 +9,7 @@ Build-Depends:
 	dh-python,
 	python-all (>= 2.6.6.3~),
 	python-cryptography (>= 0.7),
+	python-docutils,
 	python-mock,
 	python-openssl (>= 0.15),
 	python-pyasn1,
@@ -16,6 +17,8 @@ Build-Depends:
 	python-rfc3339,
 	python-setuptools,
 	python-six,
+	python-sphinx (>= 1.0.7+dfsg-1~),
+	python-sphinxcontrib.programoutput,
 	python-tz,
 	python-ndg-httpsclient,
 	python-werkzeug
@@ -34,3 +37,18 @@ Description: ACME protocol library for Python 2
  browser-trusted certificate, without any human intervention.  This
  library implements the protocol used for proving the control of a
  domain.  It currently supports only Python 2.
+
+Package: python-acme-doc
+Section: doc
+Architecture: all
+Depends: ${sphinxdoc:Depends}, ${misc:Depends}
+Description: ACME protocol library for Python 2 - Documentation
+ This is a library used by the Let's Encrypt client for the ACME
+ (Automated Certificate Management Environment).  The ACME protocol is
+ designed as part of the Let's Encrypt project, to make it possible to
+ setup an HTTPS server and have it automatically obtain a
+ browser-trusted certificate, without any human intervention.  This
+ library implements the protocol used for proving the control of a
+ domain.  It currently supports only Python 2.
+ .
+ This package provides the documentation.

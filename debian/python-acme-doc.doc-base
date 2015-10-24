@@ -1,0 +1,10 @@
+Document: python-acme-doc
+Title: Documentation for Python's ACME module
+Author: Let's Encrypt Team
+Abstract: These HTML documentation contain the auto-generated
+ documentation for the acme module in Python.
+Section: Programming/Python
+
+Format: HTML
+Index: /usr/share/doc/python-acme-doc/html/index.html
+Files: /usr/share/doc/python-acme-doc/html/*.html
