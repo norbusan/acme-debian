@@ -58,6 +58,7 @@ acme/testdata/csr.der
 acme/testdata/csr.pem
 acme/testdata/dsa512_key.pem
 acme/testdata/rsa1024_key.pem
+acme/testdata/rsa2048_key.pem
 acme/testdata/rsa256_key.pem
 acme/testdata/rsa512_key.pem
 docs/.gitignore
@@ -85,6 +86,7 @@ docs/api/jose/jwk.rst
 docs/api/jose/jws.rst
 docs/api/jose/util.rst
 docs/man/jws.rst
+examples/example_client.py
 examples/standalone/README
 examples/standalone/localhost/cert.pem
 examples/standalone/localhost/key.pem
