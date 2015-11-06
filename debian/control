@@ -7,21 +7,33 @@ Uploaders: Harlan Lieberman-Berg <hlieberman@setec.io>,
 Build-Depends:
 	debhelper (>= 9~),
 	dh-python,
+	python3,
 	python-all (>= 2.6.6.3~),
 	python-cryptography (>= 0.7),
+	python3-cryptography (>= 0.7),
 	python-docutils,
+	python3-docutils,
 	python-mock,
+	python3-mock,
 	python-openssl (>= 0.15),
+	python3-openssl (>= 0.15),
 	python-pyasn1,
+	python3-pyasn1,
 	python-requests,
+	python3-requests,
 	python-rfc3339,
+	python3-rfc3339,
 	python-setuptools,
+	python3-setuptools,
 	python-six,
 	python-sphinx (>= 1.0.7+dfsg-1~),
 	python-sphinxcontrib.programoutput,
 	python-tz,
+	python3-tz,
 	python-ndg-httpsclient,
-	python-werkzeug
+	python3-ndg-httpsclient,
+	python-werkzeug,
+	python3-werkzeug
 Standards-Version: 3.9.6
 Homepage: https://www.letsencrypt.org/
 X-Python-Version: >= 2.7
@@ -36,7 +48,19 @@ Description: ACME protocol library for Python 2
  setup an HTTPS server and have it automatically obtain a
  browser-trusted certificate, without any human intervention.  This
  library implements the protocol used for proving the control of a
- domain.  It currently supports only Python 2.
+ domain.  This library is Python 2.
+
+Package: python3-acme
+Architecture: all
+Depends: ca-certificates, ${python3:Depends}, ${misc:Depends}
+Description: ACME protocol library for Python 3
+ This is a library used by the Let's Encrypt client for the ACME
+ (Automated Certificate Management Environment).  The ACME protocol is
+ designed as part of the Let's Encrypt project, to make it possible to
+ setup an HTTPS server and have it automatically obtain a
+ browser-trusted certificate, without any human intervention.  This
+ library implements the protocol used for proving the control of a
+ domain.  This library is Python 3.
 
 Package: python-acme-doc
 Section: doc
