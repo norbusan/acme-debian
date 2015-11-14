@@ -1,4 +1,4 @@
-python-acme (0.0.0.dev20151108-1) UNRELEASED; urgency=medium
+python-acme (0.0.0.dev20151114-1) experimental; urgency=medium
 
   [ Francois Marier ]
   * Add Vcs fields to debian/control
@@ -8,8 +8,9 @@ python-acme (0.0.0.dev20151108-1) UNRELEASED; urgency=medium
   [ Harlan Lieberman-Berg ]
   * New upstream release.
   * Alter python-sphinx dependency for backport compatibility.
+  * Update dependency versions to match setup.py.
 
- -- Harlan Lieberman-Berg <hlieberman@setec.io>  Thu, 12 Nov 2015 20:43:23 -0500
+ -- Harlan Lieberman-Berg <hlieberman@setec.io>  Sat, 14 Nov 2015 12:07:50 -0500
 
 python-acme (0.0.0.dev20151104-1) experimental; urgency=medium
 
