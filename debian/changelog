@@ -1,3 +1,9 @@
+python-acme (0.0.0.dev20151123-2) experimental; urgency=medium
+
+  * Add Breaks directive to help apt figure out upgrade paths.
+
+ -- Harlan Lieberman-Berg <hlieberman@setec.io>  Tue, 01 Dec 2015 21:15:49 -0500
+
 python-acme (0.0.0.dev20151123-1) experimental; urgency=medium
 
   * New upstream version.
