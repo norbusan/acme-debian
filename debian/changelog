@@ -1,3 +1,10 @@
+python-acme (0.1.0-1) experimental; urgency=medium
+
+  * New upstream release.
+  * Change to using new GPG key.
+
+ -- Harlan Lieberman-Berg <hlieberman@setec.io>  Thu, 03 Dec 2015 21:13:28 -0500
+
 python-acme (0.0.0.dev20151123-2) experimental; urgency=medium
 
   * Add Breaks directive to help apt figure out upgrade paths.
