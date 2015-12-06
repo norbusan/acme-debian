@@ -14,3 +14,6 @@ override_dh_auto_install:
 	find $(CURDIR)/debian/ -type d -name testdata -print0 | xargs -0 rm -rf '{}' \;
 	rm -f $(CURDIR)/debian/python*-acme/usr/bin/jws
 	rm -f $(CURDIR)/debian/python*-acme/usr/share/man/man1/jws.1
+
+override_dh_auto_test:
+	no_proxy="localhost" dh_auto_test
