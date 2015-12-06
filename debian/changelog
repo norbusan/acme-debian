@@ -1,3 +1,9 @@
+python-acme (0.1.0-2) experimental; urgency=medium
+
+  * Version the python{,3}-openssl runtime dependency (closes: #807114)
+
+ -- Francois Marier <francois@debian.org>  Sat, 05 Dec 2015 21:21:10 -0800
+
 python-acme (0.1.0-1) experimental; urgency=medium
 
   * New upstream release.

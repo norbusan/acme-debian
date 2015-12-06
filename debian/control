@@ -41,7 +41,10 @@ X-Python-Version: >= 2.7
 
 Package: python-acme
 Architecture: all
-Depends: ca-certificates, ${misc:Depends}, ${python:Depends}
+Depends: ca-certificates,
+         python-openssl (>= 0.15),
+         ${misc:Depends},
+         ${python:Depends}
 Breaks: python-letsencrypt (<< ${source:Upstream-Version})
 Description: ACME protocol library for Python 2
  This is a library used by the Let's Encrypt client for the ACME
@@ -54,7 +57,10 @@ Description: ACME protocol library for Python 2
 
 Package: python3-acme
 Architecture: all
-Depends: ca-certificates, ${misc:Depends}, ${python3:Depends}
+Depends: ca-certificates,
+         python3-openssl (>= 0.15),
+         ${misc:Depends},
+         ${python3:Depends}
 Description: ACME protocol library for Python 3
  This is a library used by the Let's Encrypt client for the ACME
  (Automated Certificate Management Environment).  The ACME protocol is
