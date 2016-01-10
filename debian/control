@@ -1,6 +1,6 @@
 Source: python-acme
 Section: python
-Priority: optional
+Priority: extra
 Maintainer: Debian Let's Encrypt <letsencrypt-devel@lists.alioth.debian.org>
 Uploaders: Harlan Lieberman-Berg <hlieberman@setec.io>,
            Francois Marier <francois@debian.org>
