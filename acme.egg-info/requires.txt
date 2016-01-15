@@ -1,7 +1,7 @@
 cryptography>=0.8
 ndg-httpsclient
 pyasn1
-PyOpenSSL>=0.15
+PyOpenSSL>=0.13
 pyrfc3339
 pytz
 requests

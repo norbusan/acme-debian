@@ -48,10 +48,14 @@ acme/jose/jws_test.py
 acme/jose/util.py
 acme/jose/util_test.py
 acme/testdata/README
+acme/testdata/cert-100sans.pem
+acme/testdata/cert-idnsans.pem
 acme/testdata/cert-san.pem
 acme/testdata/cert.der
 acme/testdata/cert.pem
+acme/testdata/csr-100sans.pem
 acme/testdata/csr-6sans.pem
+acme/testdata/csr-idnsans.pem
 acme/testdata/csr-nosans.pem
 acme/testdata/csr-san.pem
 acme/testdata/csr.der
