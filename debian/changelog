@@ -1,8 +1,9 @@
-python-acme (0.1.1-2) UNRELEASED; urgency=medium
+python-acme (0.2.0-1) unstable; urgency=medium
 
+  * New upstream release.
   * Drop priority to extra, due to dep on python-mock.
 
- -- Harlan Lieberman-Berg <hlieberman@setec.io>  Sat, 09 Jan 2016 23:04:10 -0500
+ -- Harlan Lieberman-Berg <hlieberman@setec.io>  Fri, 15 Jan 2016 19:04:18 -0500
 
 python-acme (0.1.1-1) unstable; urgency=medium
 
