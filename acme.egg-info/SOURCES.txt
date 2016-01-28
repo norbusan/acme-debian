@@ -1,6 +1,7 @@
 LICENSE.txt
 MANIFEST.in
 README.rst
+setup.cfg
 setup.py
 acme/__init__.py
 acme/challenges.py
