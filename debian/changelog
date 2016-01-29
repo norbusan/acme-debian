@@ -1,3 +1,10 @@
+python-acme (0.3.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Switch Vcs-git to https.
+
+ -- Harlan Lieberman-Berg <hlieberman@setec.io>  Thu, 28 Jan 2016 18:55:06 -0500
+
 python-acme (0.2.0-1) unstable; urgency=medium
 
   * New upstream release.
