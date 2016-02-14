@@ -1,3 +1,9 @@
+python-acme (0.4.0-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Harlan Lieberman-Berg <hlieberman@setec.io>  Thu, 11 Feb 2016 19:39:40 -0500
+
 python-acme (0.3.0-1) unstable; urgency=medium
 
   * New upstream release.
