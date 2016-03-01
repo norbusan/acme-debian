@@ -1,3 +1,12 @@
+python-acme (0.4.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop B-D on python3?-werkezug no longer needed by upstream
+  * Fix Vcs-git URL
+  * Bump S-V; no changes needed
+
+ -- Harlan Lieberman-Berg <hlieberman@setec.io>  Mon, 29 Feb 2016 21:09:41 -0500
+
 python-acme (0.4.0-1) unstable; urgency=medium
 
   * New upstream release.
