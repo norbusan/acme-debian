@@ -1,6 +1,6 @@
 Metadata-Version: 1.1
 Name: acme
-Version: 0.4.1
+Version: 0.5.0
 Summary: ACME protocol implementation in Python
 Home-page: https://github.com/letsencrypt/letsencrypt
 Author: Let's Encrypt Project

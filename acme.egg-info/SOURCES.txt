@@ -18,8 +18,6 @@ acme/jws.py
 acme/jws_test.py
 acme/messages.py
 acme/messages_test.py
-acme/other.py
-acme/other_test.py
 acme/standalone.py
 acme/standalone_test.py
 acme/test_util.py

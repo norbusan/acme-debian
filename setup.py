@@ -4,7 +4,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 
-version = '0.4.1'
+version = '0.5.0'
 
 # Please update tox.ini when modifying dependency version requirements
 install_requires = [
@@ -18,7 +18,9 @@ install_requires = [
     'pyrfc3339',
     'pytz',
     'requests',
-    'setuptools',  # pkg_resources
+    # For pkg_resources. >=1.0 so pip resolves it to a version cryptography
+    # will tolerate; see #2599:
+    'setuptools>=1.0',
     'six',
 ]
 

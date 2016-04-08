@@ -5,7 +5,7 @@ PyOpenSSL>=0.13
 pyrfc3339
 pytz
 requests
-setuptools
+setuptools>=1.0
 six
 mock
 
