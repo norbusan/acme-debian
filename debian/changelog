@@ -1,3 +1,11 @@
+python-acme (0.6.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Add Breaks on python-certbot in rename prep.
+  * Bump S-V; no changes needed.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Thu, 12 May 2016 18:38:11 -0400
+
 python-acme (0.5.0-1) unstable; urgency=medium
 
   * New upstream release.
