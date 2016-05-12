@@ -80,6 +80,6 @@ Description: ACME protocol library for Python 2 - Documentation
  setup an HTTPS server and have it automatically obtain a
  browser-trusted certificate, without any human intervention.  This
  library implements the protocol used for proving the control of a
- domain.  It currently supports only Python 2.
+ domain.
  .
  This package provides the documentation.
