@@ -31,7 +31,7 @@ Build-Depends: debhelper (>= 9~),
                python3-rfc3339,
                python3-setuptools,
                python3-tz,
-Standards-Version: 3.9.7
+Standards-Version: 3.9.8
 Homepage: https://letsencrypt.org/
 Vcs-Git: https://anonscm.debian.org/git/letsencrypt/python-acme.git
 Vcs-Browser: https://anonscm.debian.org/cgit/letsencrypt/python-acme.git/
