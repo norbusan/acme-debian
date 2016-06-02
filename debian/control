@@ -45,6 +45,7 @@ Depends: ca-certificates,
          ${python:Depends}
 Breaks: python-letsencrypt (<< ${source:Upstream-Version}),
         python-certbot (<< ${source:Upstream-Version})
+Suggests: python-acme-doc
 Description: ACME protocol library for Python 2
  This is a library used by the Let's Encrypt client for the ACME
  (Automated Certificate Management Environment).  The ACME protocol is
@@ -60,6 +61,7 @@ Depends: ca-certificates,
          python3-openssl (>= 0.15),
          ${misc:Depends},
          ${python3:Depends}
+Suggests: python-acme-doc
 Description: ACME protocol library for Python 3
  This is a library used by the Let's Encrypt client for the ACME
  (Automated Certificate Management Environment).  The ACME protocol is
