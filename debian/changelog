@@ -1,8 +1,9 @@
 python-acme (0.8.1-1) unstable; urgency=medium
 
   * New upstream release.
+  * Specify python-setuptools version.  (Closes: #825619)
 
- -- Harlan Lieberman-Berg <hlieberman@debian.org>  Sat, 25 Jun 2016 00:21:24 -0400
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Thu, 30 Jun 2016 18:54:04 -0400
 
 python-acme (0.8.0-1) unstable; urgency=high
 
