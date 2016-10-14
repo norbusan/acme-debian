@@ -14,6 +14,9 @@ nose
 pep8
 tox
 
+[dns]
+dnspython>=1.12
+
 [docs]
 Sphinx>=1.0
 sphinx_rtd_theme

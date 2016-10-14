@@ -10,6 +10,8 @@ acme/client.py
 acme/client_test.py
 acme/crypto_util.py
 acme/crypto_util_test.py
+acme/dns_resolver.py
+acme/dns_resolver_test.py
 acme/errors.py
 acme/errors_test.py
 acme/fields.py
