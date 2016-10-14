@@ -1,3 +1,9 @@
+python-acme (0.9.3-1) unstable; urgency=medium
+
+  * New upstream release.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Thu, 13 Oct 2016 22:21:10 -0400
+
 python-acme (0.8.1-2) unstable; urgency=medium
 
   * Ensure there's no network access at build time.
