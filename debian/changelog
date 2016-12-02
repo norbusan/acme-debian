@@ -1,3 +1,9 @@
+python-acme (0.9.3-2) unstable; urgency=medium
+
+  * Add patch to fix tests with OpenSSL 1.1 (Closes: #844944)
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Fri, 02 Dec 2016 17:53:38 -0500
+
 python-acme (0.9.3-1) unstable; urgency=medium
 
   * New upstream release.
