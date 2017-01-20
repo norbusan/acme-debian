@@ -1,10 +1,8 @@
 cryptography>=0.8
-ndg-httpsclient
-pyasn1
 PyOpenSSL>=0.13
 pyrfc3339
 pytz
-requests
+requests[security]>=2.4.1
 setuptools>=1.0
 six
 mock
@@ -20,4 +18,3 @@ dnspython>=1.12
 [docs]
 Sphinx>=1.0
 sphinx_rtd_theme
-sphinxcontrib-programoutput
