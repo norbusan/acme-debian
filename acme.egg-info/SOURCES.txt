@@ -63,6 +63,7 @@ acme/testdata/csr.der
 acme/testdata/csr.pem
 acme/testdata/dsa512_key.pem
 acme/testdata/rsa1024_key.pem
+acme/testdata/rsa2048_cert.pem
 acme/testdata/rsa2048_key.pem
 acme/testdata/rsa256_key.pem
 acme/testdata/rsa512_key.pem
@@ -71,6 +72,7 @@ docs/Makefile
 docs/api.rst
 docs/conf.py
 docs/index.rst
+docs/jws-help.txt
 docs/make.bat
 docs/_static/.gitignore
 docs/_templates/.gitignore
