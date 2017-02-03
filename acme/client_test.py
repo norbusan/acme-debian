@@ -81,6 +81,9 @@ class ClientTest(unittest.TestCase):
             uri='https://www.letsencrypt-demo.org/acme/cert/1',
             cert_chain_uri='https://www.letsencrypt-demo.org/ca')
 
+        # Reason code for revocation
+        self.rsn = 1
+
     def test_init_downloads_directory(self):
         uri = 'http://www.letsencrypt-demo.org/directory'
         from acme.client import Client
@@ -121,6 +124,20 @@ class ClientTest(unittest.TestCase):
         self.assertRaises(
             errors.UnexpectedUpdate, self.client.update_registration, self.regr)
 
+    def test_deactivate_account(self):
+        self.response.headers['Location'] = self.regr.uri
+        self.response.json.return_value = self.regr.body.to_json()
+        self.assertEqual(self.regr,
+                         self.client.deactivate_registration(self.regr))
+
+    def test_deactivate_account_bad_registration_returned(self):
+        self.response.headers['Location'] = self.regr.uri
+        self.response.json.return_value = "some wrong registration thing"
+        self.assertRaises(
+            errors.UnexpectedUpdate,
+            self.client.deactivate_registration,
+            self.regr)
+
     def test_query_registration(self):
         self.response.json.return_value = self.regr.body.to_json()
         self.assertEqual(self.regr, self.client.query_registration(self.regr))
@@ -153,7 +170,7 @@ class ClientTest(unittest.TestCase):
             self.directory.new_authz,
             messages.NewAuthorization(identifier=self.identifier))
 
-    def test_requets_challenges_custom_uri(self):
+    def test_request_challenges_custom_uri(self):
         self._prepare_response_for_request_challenges()
         self.client.request_challenges(self.identifier, 'URI')
         self.net.post.assert_called_once_with('URI', mock.ANY)
@@ -371,7 +388,7 @@ class ClientTest(unittest.TestCase):
             errors.PollError, self.client.poll_and_request_issuance,
             csr, authzrs=(invalid_authzr,), mintime=mintime)
 
-        # exceeded max_attemps | TODO: move to a separate test
+        # exceeded max_attempts | TODO: move to a separate test
         self.assertRaises(
             errors.PollError, self.client.poll_and_request_issuance,
             csr, authzrs, mintime=mintime, max_attempts=2)
@@ -427,13 +444,22 @@ class ClientTest(unittest.TestCase):
         self.assertRaises(errors.Error, self.client.fetch_chain, self.certr)
 
     def test_revoke(self):
-        self.client.revoke(self.certr.body)
+        self.client.revoke(self.certr.body, self.rsn)
         self.net.post.assert_called_once_with(
             self.directory[messages.Revocation], mock.ANY, content_type=None)
 
+    def test_revocation_payload(self):
+        obj = messages.Revocation(certificate=self.certr.body, reason=self.rsn)
+        self.assertTrue('reason' in obj.to_partial_json().keys())
+        self.assertEquals(self.rsn, obj.to_partial_json()['reason'])
+
     def test_revoke_bad_status_raises_error(self):
         self.response.status_code = http_client.METHOD_NOT_ALLOWED
-        self.assertRaises(errors.ClientError, self.client.revoke, self.certr)
+        self.assertRaises(
+            errors.ClientError,
+            self.client.revoke,
+            self.certr,
+            self.rsn)
 
 
 class ClientNetworkTest(unittest.TestCase):
@@ -685,6 +711,16 @@ class ClientNetworkWithMockedResponseTest(unittest.TestCase):
     def test_post_failed_retry(self):
         check_response = mock.MagicMock()
         check_response.side_effect = messages.Error.with_code('badNonce')
+
+        # pylint: disable=protected-access
+        self.net._check_response = check_response
+        self.assertRaises(messages.Error, self.net.post, 'uri',
+                          self.obj, content_type=self.content_type)
+
+    def test_post_not_retried(self):
+        check_response = mock.MagicMock()
+        check_response.side_effect = [messages.Error.with_code('malformed'),
+                                      self.checked_response]
 
         # pylint: disable=protected-access
         self.net._check_response = check_response
