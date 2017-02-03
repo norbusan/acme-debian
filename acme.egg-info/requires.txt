@@ -9,11 +9,7 @@ mock
 
 [dev]
 nose
-pep8
 tox
-
-[dns]
-dnspython>=1.12
 
 [docs]
 Sphinx>=1.0
