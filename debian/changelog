@@ -1,3 +1,10 @@
+python-acme (0.11.1-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Drop dep on python3?-dnspython removed upstream
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Thu, 02 Feb 2017 20:31:00 -0500
+
 python-acme (0.10.2-1) unstable; urgency=medium
 
   * New upstream release.
