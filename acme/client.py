@@ -620,13 +620,14 @@ class ClientNetwork(object):  # pylint: disable=too-many-instance-attributes
 
         """
         if method == "POST":
-            logging.debug('Sending POST request to %s:\n%s',
+            logger.debug('Sending POST request to %s:\n%s',
                           url, kwargs['data'])
         else:
-            logging.debug('Sending %s request to %s.', method, url)
+            logger.debug('Sending %s request to %s.', method, url)
         kwargs['verify'] = self.verify_ssl
         kwargs.setdefault('headers', {})
         kwargs['headers'].setdefault('User-Agent', self.user_agent)
+        kwargs.setdefault('timeout', 45) # timeout after 45 seconds
         response = self.session.request(method, url, *args, **kwargs)
         # If content is DER, log the base64 of it instead of raw bytes, to keep
         # binary data out of the logs.
@@ -670,7 +671,7 @@ class ClientNetwork(object):  # pylint: disable=too-many-instance-attributes
 
     def _get_nonce(self, url):
         if not self._nonces:
-            logging.debug('Requesting fresh nonce')
+            logger.debug('Requesting fresh nonce')
             self._add_nonce(self.head(url))
         return self._nonces.pop()
 
