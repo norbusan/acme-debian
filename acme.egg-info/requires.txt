@@ -1,11 +1,11 @@
 cryptography>=0.8
+mock
 PyOpenSSL>=0.13
 pyrfc3339
 pytz
 requests[security]>=2.10
 setuptools>=1.0
 six
-mock
 
 [dev]
 nose
