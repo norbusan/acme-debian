@@ -3,7 +3,7 @@ mock
 PyOpenSSL>=0.13
 pyrfc3339
 pytz
-requests[security]>=2.10
+requests[security]>=2.4.1
 setuptools>=1.0
 six
 
