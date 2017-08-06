@@ -35,6 +35,7 @@ Homepage: https://letsencrypt.org/
 Vcs-Git: https://anonscm.debian.org/git/letsencrypt/python-acme.git
 Vcs-Browser: https://anonscm.debian.org/cgit/letsencrypt/python-acme.git/
 X-Python-Version: >= 2.7
+Testsuite: autopkgtest-pkg-python
 
 Package: python-acme
 Architecture: all
