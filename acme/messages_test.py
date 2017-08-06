@@ -26,6 +26,7 @@ class ErrorTest(unittest.TestCase):
             'type': ERROR_PREFIX + 'malformed',
         }
         self.error_custom = Error(typ='custom', detail='bar')
+        self.empty_error = Error()
         self.jobj_custom = {'type': 'custom', 'detail': 'bar'}
 
     def test_default_typ(self):
@@ -45,12 +46,6 @@ class ErrorTest(unittest.TestCase):
             'The request message was malformed', self.error.description)
         self.assertTrue(self.error_custom.description is None)
 
-    def test_str(self):
-        self.assertEqual(
-            'urn:ietf:params:acme:error:malformed :: The request message was '
-            'malformed :: foo :: title', str(self.error))
-        self.assertEqual('custom :: bar', str(self.error_custom))
-
     def test_code(self):
         from acme.messages import Error
         self.assertEqual('malformed', self.error.code)
@@ -60,8 +55,16 @@ class ErrorTest(unittest.TestCase):
     def test_is_acme_error(self):
         from acme.messages import is_acme_error
         self.assertTrue(is_acme_error(self.error))
-        self.assertTrue(is_acme_error(str(self.error)))
         self.assertFalse(is_acme_error(self.error_custom))
+        self.assertFalse(is_acme_error(self.empty_error))
+        self.assertFalse(is_acme_error("must pet all the {dogs|rabbits}"))
+
+    def test_unicode_error(self):
+        from acme.messages import Error, ERROR_PREFIX, is_acme_error
+        arabic_error = Error(
+                detail=u'\u0639\u062f\u0627\u0644\u0629', typ=ERROR_PREFIX + 'malformed',
+            title='title')
+        self.assertTrue(is_acme_error(arabic_error))
 
     def test_with_code(self):
         from acme.messages import Error, is_acme_error
@@ -170,8 +173,7 @@ class RegistrationTest(unittest.TestCase):
 
         from acme.messages import Registration
         self.reg = Registration(key=key, contact=contact, agreement=agreement)
-        self.reg_none = Registration(authorizations='uri/authorizations',
-                                     certificates='uri/certificates')
+        self.reg_none = Registration()
 
         self.jobj_to = {
             'contact': contact,
@@ -225,14 +227,12 @@ class RegistrationResourceTest(unittest.TestCase):
         from acme.messages import RegistrationResource
         self.regr = RegistrationResource(
             body=mock.sentinel.body, uri=mock.sentinel.uri,
-            new_authzr_uri=mock.sentinel.new_authzr_uri,
             terms_of_service=mock.sentinel.terms_of_service)
 
     def test_to_partial_json(self):
         self.assertEqual(self.regr.to_json(), {
             'body': mock.sentinel.body,
             'uri': mock.sentinel.uri,
-            'new_authzr_uri': mock.sentinel.new_authzr_uri,
             'terms_of_service': mock.sentinel.terms_of_service,
         })
 
@@ -346,9 +346,7 @@ class AuthorizationResourceTest(unittest.TestCase):
         from acme.messages import AuthorizationResource
         authzr = AuthorizationResource(
             uri=mock.sentinel.uri,
-            body=mock.sentinel.body,
-            new_cert_uri=mock.sentinel.new_cert_uri,
-        )
+            body=mock.sentinel.body)
         self.assertTrue(isinstance(authzr, jose.JSONDeSerializable))
 
 

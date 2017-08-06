@@ -52,6 +52,7 @@ acme/testdata/cert-idnsans.pem
 acme/testdata/cert-san.pem
 acme/testdata/cert.der
 acme/testdata/cert.pem
+acme/testdata/critical-san.pem
 acme/testdata/csr-100sans.pem
 acme/testdata/csr-6sans.pem
 acme/testdata/csr-idnsans.pem

@@ -1,5 +1,6 @@
 """ACME protocol messages."""
 import collections
+import six
 
 from acme import challenges
 from acme import errors
@@ -36,9 +37,13 @@ ERROR_TYPE_DESCRIPTIONS.update(dict(  # add errors with old prefix, deprecate me
 
 def is_acme_error(err):
     """Check if argument is an ACME error."""
-    return (ERROR_PREFIX in str(err)) or (OLD_ERROR_PREFIX in str(err))
+    if isinstance(err, Error) and (err.typ is not None):
+        return (ERROR_PREFIX in err.typ) or (OLD_ERROR_PREFIX in err.typ)
+    else:
+        return False
 
 
+@six.python_2_unicode_compatible
 class Error(jose.JSONObjectWithFields, errors.Error):
     """ACME error.
 
@@ -92,13 +97,13 @@ class Error(jose.JSONObjectWithFields, errors.Error):
             return code
 
     def __str__(self):
-        return ' :: '.join(
-            part for part in
+        return b' :: '.join(
+            part.encode('ascii', 'backslashreplace') for part in
             (self.typ, self.description, self.detail, self.title)
-            if part is not None)
+            if part is not None).decode()
 
 
-class _Constant(jose.JSONDeSerializable, collections.Hashable):
+class _Constant(jose.JSONDeSerializable, collections.Hashable):  # type: ignore
     """ACME constant."""
     __slots__ = ('name',)
     POSSIBLE_NAMES = NotImplemented
@@ -132,7 +137,7 @@ class _Constant(jose.JSONDeSerializable, collections.Hashable):
 
 class Status(_Constant):
     """ACME "status" field."""
-    POSSIBLE_NAMES = {}
+    POSSIBLE_NAMES = {}  # type: dict
 STATUS_UNKNOWN = Status('unknown')
 STATUS_PENDING = Status('pending')
 STATUS_PROCESSING = Status('processing')
@@ -143,7 +148,7 @@ STATUS_REVOKED = Status('revoked')
 
 class IdentifierType(_Constant):
     """ACME identifier type."""
-    POSSIBLE_NAMES = {}
+    POSSIBLE_NAMES = {}  # type: dict
 IDENTIFIER_FQDN = IdentifierType('dns')  # IdentifierDNS in Boulder
 
 
@@ -161,7 +166,7 @@ class Identifier(jose.JSONObjectWithFields):
 class Directory(jose.JSONDeSerializable):
     """Directory."""
 
-    _REGISTERED_TYPES = {}
+    _REGISTERED_TYPES = {}  # type: dict
 
     class Meta(jose.JSONObjectWithFields):
         """Directory Meta."""
@@ -191,7 +196,7 @@ class Directory(jose.JSONDeSerializable):
         try:
             return self[name.replace('_', '-')]
         except KeyError as error:
-            raise AttributeError(str(error))
+            raise AttributeError(str(error) + ': ' + name)
 
     def __getitem__(self, name):
         try:
@@ -237,10 +242,6 @@ class Registration(ResourceBody):
     :ivar tuple contact: Contact information following ACME spec,
         `tuple` of `unicode`.
     :ivar unicode agreement:
-    :ivar unicode authorizations: URI where
-        `messages.Registration.Authorizations` can be found.
-    :ivar unicode certificates: URI where
-        `messages.Registration.Certificates` can be found.
 
     """
     # on new-reg key server ignores 'key' and populates it based on
@@ -248,25 +249,7 @@ class Registration(ResourceBody):
     key = jose.Field('key', omitempty=True, decoder=jose.JWK.from_json)
     contact = jose.Field('contact', omitempty=True, default=())
     agreement = jose.Field('agreement', omitempty=True)
-    authorizations = jose.Field('authorizations', omitempty=True)
-    certificates = jose.Field('certificates', omitempty=True)
     status = jose.Field('status', omitempty=True)
-
-    class Authorizations(jose.JSONObjectWithFields):
-        """Authorizations granted to Account in the process of registration.
-
-        :ivar tuple authorizations: URIs to Authorization Resources.
-
-        """
-        authorizations = jose.Field('authorizations')
-
-    class Certificates(jose.JSONObjectWithFields):
-        """Certificates granted to Account in the process of registration.
-
-        :ivar tuple certificates: URIs to Certificate Resources.
-
-        """
-        certificates = jose.Field('certificates')
 
     phone_prefix = 'tel:'
     email_prefix = 'mailto:'
@@ -315,12 +298,12 @@ class RegistrationResource(ResourceWithURI):
     """Registration Resource.
 
     :ivar acme.messages.Registration body:
-    :ivar unicode new_authzr_uri: URI found in the 'next' ``Link`` header
+    :ivar unicode new_authzr_uri: Deprecated. Do not use.
     :ivar unicode terms_of_service: URL for the CA TOS.
 
     """
     body = jose.Field('body', decoder=Registration.from_json)
-    new_authzr_uri = jose.Field('new_authzr_uri')
+    new_authzr_uri = jose.Field('new_authzr_uri', omitempty=True)
     terms_of_service = jose.Field('terms_of_service', omitempty=True)
 
 
@@ -425,11 +408,11 @@ class AuthorizationResource(ResourceWithURI):
     """Authorization Resource.
 
     :ivar acme.messages.Authorization body:
-    :ivar unicode new_cert_uri: URI found in the 'next' ``Link`` header
+    :ivar unicode new_cert_uri: Deprecated. Do not use.
 
     """
     body = jose.Field('body', decoder=Authorization.from_json)
-    new_cert_uri = jose.Field('new_cert_uri')
+    new_cert_uri = jose.Field('new_cert_uri', omitempty=True)
 
 
 @Directory.register
