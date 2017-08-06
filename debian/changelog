@@ -1,3 +1,13 @@
+python-acme (0.17.0-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Reduce dependency on python-requests, following upstream.
+  * Increase priority to optional to comply with Policy v4.0.1.0
+  * Declare Testsuite using simple autopkgtest.
+  * Bump S-V to 4.0.1.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Sun, 06 Aug 2017 14:11:53 -0400
+
 python-acme (0.14.2-1) experimental; urgency=medium
 
   * Team upload.
