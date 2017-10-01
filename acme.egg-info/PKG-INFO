@@ -1,11 +1,12 @@
 Metadata-Version: 1.1
 Name: acme
-Version: 0.17.0
+Version: 0.18.2
 Summary: ACME protocol implementation in Python
 Home-page: https://github.com/letsencrypt/letsencrypt
 Author: Certbot Project
 Author-email: client-dev@letsencrypt.org
 License: Apache License 2.0
+Description-Content-Type: UNKNOWN
 Description: UNKNOWN
 Platform: UNKNOWN
 Classifier: Development Status :: 3 - Alpha
