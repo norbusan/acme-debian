@@ -1,3 +1,11 @@
+python-acme (0.18.2-1) unstable; urgency=medium
+
+  * New upstream release.
+  * Bump S-V; no changes needed.
+  * Switch to python3-sphinx for docs.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Sun, 01 Oct 2017 17:38:25 -0400
+
 python-acme (0.17.0-1) unstable; urgency=medium
 
   * New upstream release.
