@@ -5,7 +5,7 @@ pyrfc3339
 pytz
 requests[security]>=2.4.1
 setuptools>=1.0
-six
+six>=1.9.0
 
 [dev]
 nose
