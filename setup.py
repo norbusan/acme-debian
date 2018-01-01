@@ -4,7 +4,7 @@ from setuptools import setup
 from setuptools import find_packages
 
 
-version = '0.19.0'
+version = '0.20.0'
 
 # Please update tox.ini when modifying dependency version requirements
 install_requires = [
@@ -31,7 +31,8 @@ if sys.version_info < (2, 7):
     ])
 
 dev_extras = [
-    'nose',
+    'pytest',
+    'pytest-xdist',
     'tox',
 ]
 
