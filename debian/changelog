@@ -1,3 +1,12 @@
+python-acme (0.20.0-1) unstable; urgency=low
+
+  * New upstream release.
+  * Add new dependencies introduced upstream.
+  * Bump S-V, debhelper versions.
+  * Move doc-base ref to package instead of package-doc.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Fri, 05 Jan 2018 21:44:42 -0500
+
 python-acme (0.19.0-1) unstable; urgency=medium
 
   * New upstream release.
