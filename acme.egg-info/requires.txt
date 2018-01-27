@@ -1,4 +1,5 @@
 cryptography>=0.8
+josepy>=1.0.0
 mock
 PyOpenSSL>=0.13
 pyrfc3339
