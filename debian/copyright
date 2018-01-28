@@ -1,4 +1,4 @@
-Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
+Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Source: https://pypi.python.org/pypi/acme/
 Upstream-Name: acme
 
@@ -7,7 +7,7 @@ Copyright: 2015, Electronic Frontier Foundation and others
 License: Apache-2.0
 
 Files: debian/*
-Copyright: 2015, Harlan Lieberman-Berg <hlieberman@setec.io>
+Copyright: 2015-2018, Harlan Lieberman-Berg <hlieberman@setec.io>
            2015, Francois Marier <francois@debian.org>
 License: Apache-2.0
 
