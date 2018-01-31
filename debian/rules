@@ -11,3 +11,7 @@ override_dh_auto_build:
 		http_proxy='127.0.0.1:9' \
 		https_proxy='127.0.0.1:9' \
 		sphinx-build -N -bhtml docs/ build/html
+
+override_dh_auto_install:
+	dh_auto_install
+	find $(CURDIR)/debian/ -type d -name testdata -print0 | xargs -0 rm -rf '{}' \;
