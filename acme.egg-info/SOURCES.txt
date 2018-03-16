@@ -31,6 +31,7 @@ acme.egg-info/top_level.txt
 acme/testdata/README
 acme/testdata/cert-100sans.pem
 acme/testdata/cert-idnsans.pem
+acme/testdata/cert-nocn.der
 acme/testdata/cert-san.pem
 acme/testdata/cert.der
 acme/testdata/cert.pem
@@ -63,7 +64,6 @@ docs/api/errors.rst
 docs/api/fields.rst
 docs/api/jose.rst
 docs/api/messages.rst
-docs/api/other.rst
 docs/api/standalone.rst
 docs/man/jws.rst
 examples/example_client.py
