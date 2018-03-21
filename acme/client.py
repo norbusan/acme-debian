@@ -227,8 +227,7 @@ class ClientBase(object):  # pylint: disable=too-many-instance-attributes
         response = self._post(url,
                               messages.Revocation(
                                 certificate=cert,
-                                reason=rsn),
-                                content_type=None)
+                                reason=rsn))
         if response.status_code != http_client.OK:
             raise errors.ClientError(
                 'Successful revocation must return HTTP OK status')
@@ -260,11 +259,12 @@ class Client(ClientBase):
         """
         # pylint: disable=too-many-arguments
         self.key = key
-        self.net = ClientNetwork(key, alg=alg, verify_ssl=verify_ssl) if net is None else net
+        if net is None:
+            net = ClientNetwork(key, alg=alg, verify_ssl=verify_ssl)
 
         if isinstance(directory, six.string_types):
             directory = messages.Directory.from_json(
-                self.net.get(directory).json())
+                net.get(directory).json())
         super(Client, self).__init__(directory=directory,
             net=net, acme_version=1)
 
