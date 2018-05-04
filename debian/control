@@ -1,7 +1,7 @@
 Source: python-acme
 Section: python
 Priority: optional
-Maintainer: Debian Let's Encrypt <letsencrypt-devel@lists.alioth.debian.org>
+Maintainer: Debian Let's Encrypt <team+letsencrypt@tracker.debian.org>
 Uploaders: Harlan Lieberman-Berg <hlieberman@debian.org>,
            Francois Marier <francois@debian.org>
 Build-Depends: debhelper (>= 11~),
