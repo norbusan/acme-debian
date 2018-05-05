@@ -1,3 +1,9 @@
+python-acme (0.24.0-2) unstable; urgency=medium
+
+  * Update team email address. (Closes: #895863)
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Fri, 04 May 2018 20:33:30 -0400
+
 python-acme (0.24.0-1) unstable; urgency=medium
 
   * New upstream release.
