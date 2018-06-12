@@ -16,6 +16,8 @@ acme/fields.py
 acme/fields_test.py
 acme/jws.py
 acme/jws_test.py
+acme/magic_typing.py
+acme/magic_typing_test.py
 acme/messages.py
 acme/messages_test.py
 acme/standalone.py
@@ -44,6 +46,7 @@ acme/testdata/csr-san.pem
 acme/testdata/csr.der
 acme/testdata/csr.pem
 acme/testdata/dsa512_key.pem
+acme/testdata/rsa1024_cert.pem
 acme/testdata/rsa1024_key.pem
 acme/testdata/rsa2048_cert.pem
 acme/testdata/rsa2048_key.pem
