@@ -38,8 +38,6 @@ Standards-Version: 4.1.4
 Homepage: https://letsencrypt.org/
 Vcs-Git: https://salsa.debian.org/letsencrypt-team/certbot/acme.git
 Vcs-Browser: https://salsa.debian.org/letsencrypt-team/certbot/acme
-X-Python-Version: >= 2.7
-X-Python3-Version: >= 3.4
 Testsuite: autopkgtest-pkg-python
 
 Package: python-acme
