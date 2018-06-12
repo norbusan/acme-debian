@@ -1,3 +1,12 @@
+python-acme (0.25.0-1) unstable; urgency=medium
+
+  * New upstream version 0.25.0
+  * Add new dependency on requests-toolbelt
+  * Drop unnecessary X-Python-Version fields
+  * Add pytest as build-time dep only.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Mon, 11 Jun 2018 21:54:41 -0400
+
 python-acme (0.24.0-2) unstable; urgency=medium
 
   * Update team email address. (Closes: #895863)
