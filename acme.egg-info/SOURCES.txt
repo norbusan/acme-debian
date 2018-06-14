@@ -1,6 +1,7 @@
 LICENSE.txt
 MANIFEST.in
 README.rst
+pytest.ini
 setup.cfg
 setup.py
 acme/__init__.py
@@ -46,7 +47,6 @@ acme/testdata/csr-san.pem
 acme/testdata/csr.der
 acme/testdata/csr.pem
 acme/testdata/dsa512_key.pem
-acme/testdata/rsa1024_cert.pem
 acme/testdata/rsa1024_key.pem
 acme/testdata/rsa2048_cert.pem
 acme/testdata/rsa2048_key.pem
