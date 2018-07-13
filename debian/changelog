@@ -1,3 +1,10 @@
+python-acme (0.26.0-1) unstable; urgency=medium
+
+  * New upstream version 0.26.0
+  * Bump S-V; add Rules-Require-Root: no
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Thu, 12 Jul 2018 22:07:01 -0400
+
 python-acme (0.25.1-1) unstable; urgency=medium
 
   * New upstream version 0.25.1
