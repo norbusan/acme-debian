@@ -1,3 +1,9 @@
+python-acme (0.28.0-1) unstable; urgency=medium
+
+  * New upstream version 0.28.0
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Wed, 07 Nov 2018 18:05:59 -0500
+
 python-acme (0.27.0-1) unstable; urgency=medium
 
   * New upstream release.
