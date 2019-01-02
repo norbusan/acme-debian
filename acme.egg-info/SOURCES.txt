@@ -15,6 +15,7 @@ acme/errors.py
 acme/errors_test.py
 acme/fields.py
 acme/fields_test.py
+acme/jose_test.py
 acme/jws.py
 acme/jws_test.py
 acme/magic_typing.py
