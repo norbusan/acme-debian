@@ -1,10 +1,10 @@
-cryptography>=0.8
+cryptography>=1.2.3
 josepy>=1.0.0
 mock
-PyOpenSSL>=0.13
+PyOpenSSL>=0.13.1
 pyrfc3339
 pytz
-requests[security]>=2.4.1
+requests[security]>=2.6.0
 requests-toolbelt>=0.3.0
 setuptools
 six>=1.9.0
