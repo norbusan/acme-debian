@@ -1,3 +1,13 @@
+python-acme (0.31.0-1) unstable; urgency=medium
+
+  * Bump dependency on josepy to >= 1.1.0
+  * Add Breaks on python-acme against certbot << 0.20
+  * New upstream version 0.31.0
+  * Add dep on python-idna required by security extra.
+  * Bump S-V; no changes needed.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Sat, 09 Feb 2019 19:07:59 -0500
+
 python-acme (0.28.0-1) unstable; urgency=medium
 
   * New upstream version 0.28.0
