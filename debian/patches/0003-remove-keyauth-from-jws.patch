@@ -1,0 +1,219 @@
+From 339d034d6a5a57d296607795a4706203f81d7059 Mon Sep 17 00:00:00 2001
+From: Adrien Ferrand <adferrand@users.noreply.github.com>
+Date: Wed, 27 Feb 2019 18:21:47 +0100
+Subject: [PATCH] Remove keyAuthorization field from the challenge response JWS
+ token (#6758)
+
+Fixes #6755.
+
+POSTing the `keyAuthorization` in a JWS token when answering an ACME challenge, has been deprecated for some time now. Indeed, this is superfluous as the request is already authentified by the JWS signature.
+
+Boulder still accepts to see this field in the JWS token, and ignore it. Pebble in non strict mode also. But Pebble in strict mode refuses the request, to prepare complete removal of this field in ACME v2.
+
+Certbot still sends the `keyAuthorization` field. This PR removes it, and makes Certbot compliant with current ACME v2 protocol, and so Pebble in strict mode.
+
+See also [letsencrypt/pebble#192](https://github.com/letsencrypt/pebble/issues/192) for implementation details server side.
+
+* New implementation, with a fallback.
+
+* Update acme/acme/client.py
+
+Co-Authored-By: adferrand <adferrand@users.noreply.github.com>
+
+* Fix an instance parameter
+
+* Update comment
+
+* Add unit tests on keyAuthorization dump
+
+* Update acme/client.py
+
+Co-Authored-By: adferrand <adferrand@users.noreply.github.com>
+
+* Restrict the magic of setting a variable in immutable object in one place. Make a soon to be removed method private.
+---
+ acme/challenges.py      | 20 ++++++++++++++++++++
+ acme/challenges_test.py | 12 ++++++++++++
+ acme/client.py          | 26 ++++++++++++++++++++------
+ acme/client_test.py     | 28 ++++++++++++++++++++++++++++
+ 4 files changed, 87 insertions(+), 6 deletions(-)
+
+Index: python-acme/acme/challenges.py
+===================================================================
+--- python-acme.orig/acme/challenges.py
++++ python-acme/acme/challenges.py
+@@ -108,6 +108,10 @@ class KeyAuthorizationChallengeResponse(
+     key_authorization = jose.Field("keyAuthorization")
+     thumbprint_hash_function = hashes.SHA256
+ 
++    def __init__(self, *args, **kwargs):
++        super(KeyAuthorizationChallengeResponse, self).__init__(*args, **kwargs)
++        self._dump_authorization_key(False)
++
+     def verify(self, chall, account_public_key):
+         """Verify the key authorization.
+ 
+@@ -140,6 +144,22 @@ class KeyAuthorizationChallengeResponse(
+ 
+         return True
+ 
++    def _dump_authorization_key(self, dump):
++        # type: (bool) -> None
++        """
++        Set if keyAuthorization is dumped in the JSON representation of this ChallengeResponse.
++        NB: This method is declared as private because it will eventually be removed.
++        :param bool dump: True to dump the keyAuthorization, False otherwise
++        """
++        object.__setattr__(self, '_dump_auth_key', dump)
++
++    def to_partial_json(self):
++        jobj = super(KeyAuthorizationChallengeResponse, self).to_partial_json()
++        if not self._dump_auth_key:  # pylint: disable=no-member
++            jobj.pop('keyAuthorization', None)
++
++        return jobj
++
+ 
+ @six.add_metaclass(abc.ABCMeta)
+ class KeyAuthorizationChallenge(_TokenChallenge):
+Index: python-acme/acme/challenges_test.py
+===================================================================
+--- python-acme.orig/acme/challenges_test.py
++++ python-acme/acme/challenges_test.py
+@@ -94,6 +94,9 @@ class DNS01ResponseTest(unittest.TestCas
+         self.response = self.chall.response(KEY)
+ 
+     def test_to_partial_json(self):
++        self.assertEqual({k: v for k, v in self.jmsg.items() if k != 'keyAuthorization'},
++                         self.msg.to_partial_json())
++        self.msg._dump_authorization_key(True)  # pylint: disable=protected-access
+         self.assertEqual(self.jmsg, self.msg.to_partial_json())
+ 
+     def test_from_json(self):
+@@ -165,6 +168,9 @@ class HTTP01ResponseTest(unittest.TestCa
+         self.response = self.chall.response(KEY)
+ 
+     def test_to_partial_json(self):
++        self.assertEqual({k: v for k, v in self.jmsg.items() if k != 'keyAuthorization'},
++                         self.msg.to_partial_json())
++        self.msg._dump_authorization_key(True)  # pylint: disable=protected-access
+         self.assertEqual(self.jmsg, self.msg.to_partial_json())
+ 
+     def test_from_json(self):
+@@ -285,6 +291,9 @@ class TLSSNI01ResponseTest(unittest.Test
+         self.assertEqual(self.z_domain, self.response.z_domain)
+ 
+     def test_to_partial_json(self):
++        self.assertEqual({k: v for k, v in self.jmsg.items() if k != 'keyAuthorization'},
++                         self.response.to_partial_json())
++        self.response._dump_authorization_key(True)  # pylint: disable=protected-access
+         self.assertEqual(self.jmsg, self.response.to_partial_json())
+ 
+     def test_from_json(self):
+@@ -419,6 +428,9 @@ class TLSALPN01ResponseTest(unittest.Tes
+         self.response = self.chall.response(KEY)
+ 
+     def test_to_partial_json(self):
++        self.assertEqual({k: v for k, v in self.jmsg.items() if k != 'keyAuthorization'},
++                         self.msg.to_partial_json())
++        self.msg._dump_authorization_key(True)  # pylint: disable=protected-access
+         self.assertEqual(self.jmsg, self.msg.to_partial_json())
+ 
+     def test_from_json(self):
+Index: python-acme/acme/client.py
+===================================================================
+--- python-acme.orig/acme/client.py
++++ python-acme/acme/client.py
+@@ -17,6 +17,7 @@ import requests
+ from requests.adapters import HTTPAdapter
+ import sys
+ 
++from acme import challenges
+ from acme import crypto_util
+ from acme import errors
+ from acme import jws
+@@ -146,7 +147,23 @@ class ClientBase(object):  # pylint: dis
+         :raises .UnexpectedUpdate:
+ 
+         """
+-        response = self._post(challb.uri, response)
++        # Because sending keyAuthorization in a response challenge has been removed from the ACME
++        # spec, it is not included in the KeyAuthorizationResponseChallenge JSON by default.
++        # However as a migration path, we temporarily expect a malformed error from the server,
++        # and fallback by resending the challenge response with the keyAuthorization field.
++        # TODO: Remove this fallback for Certbot 0.34.0
++        try:
++            response = self._post(challb.uri, response)
++        except messages.Error as error:
++            if (error.code == 'malformed'
++                    and isinstance(response, challenges.KeyAuthorizationChallengeResponse)):
++                logger.debug('Error while responding to a challenge without keyAuthorization '
++                             'in the JWS, your ACME CA server may not support it:\n%s', error)
++                logger.debug('Retrying request with keyAuthorization set.')
++                response._dump_authorization_key(True)  # pylint: disable=protected-access
++                response = self._post(challb.uri, response)
++            else:
++                raise
+         try:
+             authzr_uri = response.links['up']['url']
+         except KeyError:
+@@ -784,7 +801,7 @@ class ClientV2(ClientBase):
+             except messages.Error as error:
+                 if error.code == 'malformed':
+                     logger.debug('Error during a POST-as-GET request, '
+-                                 'your ACME CA may not support it:\n%s', error)
++                                 'your ACME CA server may not support it:\n%s', error)
+                     logger.debug('Retrying request with GET.')
+                 else:  # pragma: no cover
+                     raise
+@@ -1194,10 +1211,7 @@ class ClientNetwork(object):  # pylint:
+ 
+     def _post_once(self, url, obj, content_type=JOSE_CONTENT_TYPE,
+             acme_version=1, **kwargs):
+-        try:
+-            new_nonce_url = kwargs.pop('new_nonce_url')
+-        except KeyError:
+-            new_nonce_url = None
++        new_nonce_url = kwargs.pop('new_nonce_url', None)
+         data = self._wrap_in_jws(obj, self._get_nonce(url, new_nonce_url), url, acme_version)
+         kwargs.setdefault('headers', {'Content-Type': content_type})
+         response = self._send_request('POST', url, data=data, **kwargs)
+Index: python-acme/acme/client_test.py
+===================================================================
+--- python-acme.orig/acme/client_test.py
++++ python-acme/acme/client_test.py
+@@ -463,6 +463,34 @@ class ClientTest(ClientTestBase):
+             errors.ClientError, self.client.answer_challenge,
+             self.challr.body, challenges.DNSResponse(validation=None))
+ 
++    def test_answer_challenge_key_authorization_fallback(self):
++        self.response.links['up'] = {'url': self.challr.authzr_uri}
++        self.response.json.return_value = self.challr.body.to_json()
++
++        def _wrapper_post(url, obj, *args, **kwargs):  # pylint: disable=unused-argument
++            """
++            Simulate an old ACME CA server, that would respond a 'malformed'
++            error if keyAuthorization is missing.
++            """
++            jobj = obj.to_partial_json()
++            if 'keyAuthorization' not in jobj:
++                raise messages.Error.with_code('malformed')
++            return self.response
++        self.net.post.side_effect = _wrapper_post
++
++        # This challenge response is of type KeyAuthorizationChallengeResponse, so the fallback
++        # should be triggered, and avoid an exception.
++        http_chall_response = challenges.HTTP01Response(key_authorization='test',
++                                                        resource=mock.MagicMock())
++        self.client.answer_challenge(self.challr.body, http_chall_response)
++
++        # This challenge response is not of type KeyAuthorizationChallengeResponse, so the fallback
++        # should not be triggered, leading to an exception.
++        dns_chall_response = challenges.DNSResponse(validation=None)
++        self.assertRaises(
++            errors.Error, self.client.answer_challenge,
++            self.challr.body, dns_chall_response)
++
+     def test_retry_after_date(self):
+         self.response.headers['Retry-After'] = 'Fri, 31 Dec 1999 23:59:59 GMT'
+         self.assertEqual(

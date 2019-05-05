@@ -1,0 +1,24 @@
+From a0a8292ff26a2d062e75b865d9b9b10977dc1f80 Mon Sep 17 00:00:00 2001
+From: Adrien Ferrand <adferrand@users.noreply.github.com>
+Date: Wed, 13 Feb 2019 00:36:27 +0100
+Subject: [PATCH] Correct the Content-Type used in the POST-as-GET request to
+ retrieve a cert (#6757)
+
+---
+ acme/client.py | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+Index: python-acme/acme/client.py
+===================================================================
+--- python-acme.orig/acme/client.py
++++ python-acme/acme/client.py
+@@ -742,8 +742,7 @@ class ClientV2(ClientBase):
+             if body.error is not None:
+                 raise errors.IssuanceError(body.error)
+             if body.certificate is not None:
+-                certificate_response = self._post_as_get(body.certificate,
+-                                                    content_type=DER_CONTENT_TYPE).text
++                certificate_response = self._post_as_get(body.certificate).text
+                 return orderr.update(body=body, fullchain_pem=certificate_response)
+         raise errors.TimeoutError()
+ 
