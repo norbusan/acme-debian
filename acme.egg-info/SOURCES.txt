@@ -70,6 +70,7 @@ docs/api/jose.rst
 docs/api/messages.rst
 docs/api/standalone.rst
 docs/man/jws.rst
+examples/http01_example.py
 examples/standalone/README
 examples/standalone/localhost/cert.pem
 examples/standalone/localhost/key.pem
