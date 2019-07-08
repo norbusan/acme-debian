@@ -1,3 +1,9 @@
+python-acme (0.35.1-1) unstable; urgency=medium
+
+  * New upstream version 0.35.1.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Sun, 07 Jul 2019 20:43:56 -0400
+
 python-acme (0.31.0-1) unstable; urgency=medium
 
   * Bump dependency on josepy to >= 1.1.0
