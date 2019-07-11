@@ -1,3 +1,11 @@
+python-acme (0.36.0-1) unstable; urgency=medium
+
+  * New upstream version 0.36.0
+  * Bump compat to 12.
+  * Bump S-V; no changes needed.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Thu, 11 Jul 2019 16:28:33 -0400
+
 python-acme (0.35.1-1) unstable; urgency=medium
 
   * New upstream version 0.35.1.
