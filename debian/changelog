@@ -1,3 +1,11 @@
+python-acme (0.39.0-1) unstable; urgency=medium
+
+  * New upstream version 0.39.0
+  * Drop Python 2 packages. (Closes: #935211)
+  * Move docs path to python-acme-doc
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Tue, 01 Oct 2019 21:40:04 -0400
+
 python-acme (0.36.0-1) unstable; urgency=medium
 
   * New upstream version 0.36.0
