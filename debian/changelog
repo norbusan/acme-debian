@@ -1,3 +1,11 @@
+python-acme (0.40.0-1) unstable; urgency=medium
+
+  * New upstream version 0.40.0
+  * Switch to debhelper-compat instead of d/compat
+  * Bump S-V; no changes needed.
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Tue, 05 Nov 2019 19:28:06 -0500
+
 python-acme (0.39.0-1) unstable; urgency=medium
 
   * New upstream version 0.39.0
