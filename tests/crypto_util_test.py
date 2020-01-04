@@ -12,9 +12,9 @@ import josepy as jose
 import OpenSSL
 
 from acme import errors
-from acme import test_util
 from acme.magic_typing import List # pylint: disable=unused-import, no-name-in-module
 
+import test_util
 
 class SSLSocketAndProbeSNITest(unittest.TestCase):
     """Tests for acme.crypto_util.SSLSocket/probe_sni."""
@@ -30,7 +30,6 @@ class SSLSocketAndProbeSNITest(unittest.TestCase):
 
         class _TestServer(socketserver.TCPServer):
 
-            # pylint: disable=too-few-public-methods
             # six.moves.* | pylint: disable=attribute-defined-outside-init,no-init
 
             def server_bind(self):  # pylint: disable=missing-docstring

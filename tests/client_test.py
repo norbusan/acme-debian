@@ -16,10 +16,10 @@ from acme import challenges
 from acme import errors
 from acme import jws as acme_jws
 from acme import messages
-from acme import messages_test
-from acme import test_util
 from acme.magic_typing import Dict # pylint: disable=unused-import, no-name-in-module
 
+import messages_test
+import test_util
 
 CERT_DER = test_util.load_vector('cert.der')
 CERT_SAN_PEM = test_util.load_vector('cert-san.pem')
@@ -318,7 +318,6 @@ class BackwardsCompatibleClientV2Test(ClientTestBase):
 
 class ClientTest(ClientTestBase):
     """Tests for acme.client.Client."""
-    # pylint: disable=too-many-instance-attributes,too-many-public-methods
 
     def setUp(self):
         super(ClientTest, self).setUp()
@@ -888,7 +887,7 @@ class ClientV2Test(ClientTestBase):
                 new_nonce_url='https://www.letsencrypt-demo.org/acme/new-nonce')
             self.client.net.get.assert_not_called()
 
-            class FakeError(messages.Error):  # pylint: disable=too-many-ancestors
+            class FakeError(messages.Error):
                 """Fake error to reproduce a malformed request ACME error"""
                 def __init__(self):  # pylint: disable=super-init-not-called
                     pass
@@ -917,7 +916,6 @@ class MockJSONDeSerializable(jose.JSONDeSerializable):
 
 class ClientNetworkTest(unittest.TestCase):
     """Tests for acme.client.ClientNetwork."""
-    # pylint: disable=too-many-public-methods
 
     def setUp(self):
         self.verify_ssl = mock.MagicMock()
@@ -1123,7 +1121,6 @@ class ClientNetworkTest(unittest.TestCase):
 
 class ClientNetworkWithMockedResponseTest(unittest.TestCase):
     """Tests for acme.client.ClientNetwork which mock out response."""
-    # pylint: disable=too-many-instance-attributes
 
     def setUp(self):
         from acme.client import ClientNetwork
