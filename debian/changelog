@@ -1,3 +1,12 @@
+python-acme (1.1.0-1) unstable; urgency=medium
+
+  * New upstream version 1.1.0
+  * Bump S-V; no changes needed.
+  * Drop inactive Uploaders
+  * Drop versioned depends older than oldstable (cme fix)
+
+ -- Harlan Lieberman-Berg <hlieberman@debian.org>  Thu, 23 Jan 2020 22:53:17 -0500
+
 python-acme (0.40.0-1) unstable; urgency=medium
 
   * New upstream version 0.40.0
