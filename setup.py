@@ -1,9 +1,10 @@
-from setuptools import setup
-from setuptools import find_packages
-from setuptools.command.test import test as TestCommand
 import sys
 
-version = '1.0.0'
+from setuptools import find_packages
+from setuptools import setup
+from setuptools.command.test import test as TestCommand
+
+version = '1.1.0'
 
 # Please update tox.ini when modifying dependency version requirements
 install_requires = [
